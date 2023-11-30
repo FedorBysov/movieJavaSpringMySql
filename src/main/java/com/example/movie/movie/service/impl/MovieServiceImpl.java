@@ -5,10 +5,12 @@ import com.example.movie.movie.persistence.MovieDao;
 import com.example.movie.movie.repository.MovieRepository;
 import com.example.movie.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MovieServiceImpl implements MovieService {
 
     @Autowired

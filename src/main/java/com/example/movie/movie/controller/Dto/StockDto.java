@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @Getter
 public class StockDto {
-    private long id;
-    private long amount;
+    private Long id;
+    private Long amount;
 
 }

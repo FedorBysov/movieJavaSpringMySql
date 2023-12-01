@@ -59,14 +59,15 @@ public class SecurityConfig {
     }
 
 
-//    @Bean
-//    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception {
-//        return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
-//                .userDetailsService(userDetailService)
-//                .passwordEncoder(passwordEncoder)
-//                //
-//
-//    }
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception {
+        return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
+                .userDetailsService(userDetailService)
+                .passwordEncoder(passwordEncoder)
+                .configure(a)
+                .build();
+
+    }
 
 
 }

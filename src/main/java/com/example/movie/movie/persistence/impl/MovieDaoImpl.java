@@ -4,10 +4,12 @@ import com.example.movie.movie.entity.Movie;
 import com.example.movie.movie.persistence.MovieDao;
 import com.example.movie.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class MovieDaoImpl implements MovieDao {
 
     @Autowired

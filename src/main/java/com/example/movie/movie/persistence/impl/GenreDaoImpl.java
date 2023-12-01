@@ -4,10 +4,12 @@ import com.example.movie.movie.entity.Genre;
 import com.example.movie.movie.persistence.GenreDao;
 import com.example.movie.movie.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class GenreDaoImpl implements GenreDao {
 
     @Autowired

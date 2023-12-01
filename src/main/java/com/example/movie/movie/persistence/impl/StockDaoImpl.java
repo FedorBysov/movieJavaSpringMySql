@@ -4,10 +4,12 @@ import com.example.movie.movie.entity.Stock;
 import com.example.movie.movie.persistence.StockDao;
 import com.example.movie.movie.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class StockDaoImpl implements StockDao {
 
     @Autowired

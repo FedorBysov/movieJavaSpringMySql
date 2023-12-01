@@ -6,6 +6,7 @@ import com.example.movie.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +27,12 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public List<Movie> filterByPurchasePrice(Long minPrice, Long maxPrice) {
+    public List<Movie> filterByPurchasePrice(BigDecimal minPrice, BigDecimal maxPrice) {
         return movieRepository.filterByPurchasePrice(minPrice, maxPrice);
     }
 
     @Override
-    public List<Movie> filterByRentalPrice(Long minPrice, Long maxPrice) {
+    public List<Movie> filterByRentalPrice(BigDecimal minPrice, BigDecimal maxPrice) {
         return movieRepository.filterByRentalPrice(minPrice, maxPrice);
     }
 

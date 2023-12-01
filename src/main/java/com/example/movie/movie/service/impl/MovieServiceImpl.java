@@ -7,6 +7,7 @@ import com.example.movie.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,12 +28,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> filterByPurchasePrice(Long minPrice, Long maxPrice) {
+    public List<Movie> filterByPurchasePrice(BigDecimal minPrice, BigDecimal maxPrice) {
         return movieDao.filterByPurchasePrice(minPrice, maxPrice);
     }
 
     @Override
-    public List<Movie> filterByRentalPrice(Long minPrice, Long maxPrice) {
+    public List<Movie> filterByRentalPrice(BigDecimal minPrice, BigDecimal maxPrice) {
         return movieDao.filterByRentalPrice(minPrice, maxPrice);
     }
 

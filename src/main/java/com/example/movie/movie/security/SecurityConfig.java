@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableMethodSecurity
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -41,7 +41,7 @@ public class SecurityConfig {
 
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(jwtUtils);
 
-        authenticationFilter.setAuthenticationManager(authenticationManager);
+       authenticationFilter.setAuthenticationManager(authenticationManager);
         authenticationFilter.setFilterProcessesUrl("/login");
 
         return httpSecurity.csrf(config -> config.disable())
@@ -69,7 +69,8 @@ public class SecurityConfig {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailService)
                 .passwordEncoder(passwordEncoder)
-                .
+                .and().build();
+
 
     }
 

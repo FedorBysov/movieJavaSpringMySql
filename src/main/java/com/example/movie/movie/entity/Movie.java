@@ -37,10 +37,10 @@ public class Movie {
     private double popularity;
 
     @Column(name = "rental_price")
-    private Long rentalPrice;
+    private BigDecimal rentalPrice;
 
     @Column(name = "purchase_price")
-    private Long purchasePrice;
+    private BigDecimal purchasePrice;
 
     private boolean availability = true;
 

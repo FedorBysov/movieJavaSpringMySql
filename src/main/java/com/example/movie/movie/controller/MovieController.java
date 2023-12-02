@@ -95,18 +95,84 @@ public class MovieController {
         return ResponseEntity.ok(response);
 
     }
+//
+//    @PostMapping("/filterByPurchasePrice")
+//    @PreAuthorize("hasAnyRole('ADMIN','USER','INVITED')")
+//    public ResponseEntity<?> filterByPurchasePrice(@RequestBody RangePrice rangePrice) {
+//        Map<String, Object> response = new HashMap<>();
+//
+//        if (rangePrice.maxPrice == null || rangePrice.minPrice == null) {
+//            response.put("message", "rangePrice is blank");
+//            return new ResponseEntity<Object>(response, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        List<MovieDto> movieList = movieService.filterByPurchasePrice(rangePrice.minPrice, rangePrice.maxPrice)
+//                .stream().map(movie -> MovieDto.builder()
+//                        .id(movie.getId())
+//                        .title(movie.getTitle())
+//                        .description(movie.getDescription())
+//                        .posterImage(movie.getPosterImage())
+//                        .backgroundImage(movie.getBackgroundImage())
+//                        .popularity(movie.getPopularity())
+//                        .rentalPrice(movie.getRentalPrice())
+//                        .purchasePrice(movie.getPurchasePrice())
+//                        .availability(movie.isAvailability())
+//                        .stock(movie.getStock())
+//                        .genres(movie.getGenres())
+//                        .build()
+//                ).toList();
+//
+//        response.put("message", "the data received");
+//        response.put("Data", movieList);
+//        response.put("filter_type", EType.PURCHASE);
+//
+//        return ResponseEntity.ok(response);
+//    }
+//
+//    @PostMapping("/filterByPurchasePrice")
+//    @PreAuthorize("hasAnyRole('ADMIN','USER','INVITED')")
+//    public ResponseEntity<?> filterByRentalPrice(@RequestBody RangePrice rangePrice) {
+//        Map<String, Object> response = new HashMap<>();
+//
+//        if (rangePrice.maxPrice == null || rangePrice.minPrice == null) {
+//            response.put("message", "rangePrice is blank");
+//            return new ResponseEntity<Object>(response, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        List<MovieDto> movieList = movieService.filterByRentalPrice(rangePrice.minPrice, rangePrice.maxPrice)
+//                .stream().map(movie -> MovieDto.builder()
+//                        .id(movie.getId())
+//                        .title(movie.getTitle())
+//                        .description(movie.getDescription())
+//                        .posterImage(movie.getPosterImage())
+//                        .backgroundImage(movie.getBackgroundImage())
+//                        .popularity(movie.getPopularity())
+//                        .rentalPrice(movie.getRentalPrice())
+//                        .purchasePrice(movie.getPurchasePrice())
+//                        .availability(movie.isAvailability())
+//                        .stock(movie.getStock())
+//                        .genres(movie.getGenres())
+//                        .build()
+//                ).toList();
+//
+//        response.put("message", "the data received");
+//        response.put("Data", movieList);
+//        response.put("filter_type", EType.RENTAL);
+//
+//        return ResponseEntity.ok(response);
+//    }
 
-    @PostMapping("/filterByPurchasePrice")
+
+    @PostMapping("/filter-price")
     @PreAuthorize("hasAnyRole('ADMIN','USER','INVITED')")
-    public ResponseEntity<?> filterByPurchasePrice(@RequestBody RangePrice rangePrice) {
+    public ResponseEntity<?> filterByRangePrice(@RequestBody RangePrice rangePrice){
         Map<String, Object> response = new HashMap<>();
-
-        if (rangePrice.maxPrice == null || rangePrice.minPrice == null) {
-            response.put("message", "rangePrice is blank");
+        if(rangePrice.minPrice == null || rangePrice.maxPrice == null){
+            response.put("message","Params min price or max price is blank");
             return new ResponseEntity<Object>(response, HttpStatus.BAD_REQUEST);
         }
 
-        List<MovieDto> movieList = movieService.filterByPurchasePrice(rangePrice.minPrice, rangePrice.maxPrice)
+        List<MovieDto>movieList = movieService.filterByRangePrice(rangePrice.minPrice, rangePrice.maxPrice, rangePrice.type)
                 .stream().map(movie -> MovieDto.builder()
                         .id(movie.getId())
                         .title(movie.getTitle())
@@ -116,48 +182,17 @@ public class MovieController {
                         .popularity(movie.getPopularity())
                         .rentalPrice(movie.getRentalPrice())
                         .purchasePrice(movie.getPurchasePrice())
-                        .availability(movie.isAvailability())
+                        .availability(movie.isAvailability()) // lombok agrega el get de esta forma isAvailability
                         .stock(movie.getStock())
                         .genres(movie.getGenres())
                         .build()
                 ).toList();
 
-        response.put("message", "the data received");
+        EType typeFiler = rangePrice.type == EType.PURCHASE ? EType.PURCHASE : EType.RENTAL;
+
+        response.put("message", "Records obtained");
         response.put("Data", movieList);
-        response.put("filter_type", EType.PURCHASE);
-
-        return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/filterByPurchasePrice")
-    @PreAuthorize("hasAnyRole('ADMIN','USER','INVITED')")
-    public ResponseEntity<?> filterByRentalPrice(@RequestBody RangePrice rangePrice) {
-        Map<String, Object> response = new HashMap<>();
-
-        if (rangePrice.maxPrice == null || rangePrice.minPrice == null) {
-            response.put("message", "rangePrice is blank");
-            return new ResponseEntity<Object>(response, HttpStatus.BAD_REQUEST);
-        }
-
-        List<MovieDto> movieList = movieService.filterByRentalPrice(rangePrice.minPrice, rangePrice.maxPrice)
-                .stream().map(movie -> MovieDto.builder()
-                        .id(movie.getId())
-                        .title(movie.getTitle())
-                        .description(movie.getDescription())
-                        .posterImage(movie.getPosterImage())
-                        .backgroundImage(movie.getBackgroundImage())
-                        .popularity(movie.getPopularity())
-                        .rentalPrice(movie.getRentalPrice())
-                        .purchasePrice(movie.getPurchasePrice())
-                        .availability(movie.isAvailability())
-                        .stock(movie.getStock())
-                        .genres(movie.getGenres())
-                        .build()
-                ).toList();
-
-        response.put("message", "the data received");
-        response.put("Data", movieList);
-        response.put("filter_type", EType.RENTAL);
+        response.put("filter_type", typeFiler);
 
         return ResponseEntity.ok(response);
     }

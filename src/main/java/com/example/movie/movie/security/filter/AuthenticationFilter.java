@@ -72,13 +72,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         userData.put("username", user.getUsername());
 
         httpResponse.put("Data", userData);
-        httpResponse.put("message", "Autenticacion correcta");
+        httpResponse.put("message", "Autenticacion correctv");
 
-        // responder en formato jso usando jackson
         response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.getWriter().flush(); // aegurarse que los ajustes se apliquen
+        response.getWriter().flush();
 
         super.successfulAuthentication(request, response, chain, authResult);
     }

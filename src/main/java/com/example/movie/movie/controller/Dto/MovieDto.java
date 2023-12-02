@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -27,10 +28,10 @@ public class MovieDto {
     private double popularity;
     @NotNull
     @Column(name = "rental_price")
-    private Long rentalPrice;
+    private BigDecimal rentalPrice;
     @NotNull
     @Column(name = "purchase_price")
-    private Long purchasePrice;
+    private BigDecimal purchasePrice;
     @NotNull
     private boolean availability = true;
 

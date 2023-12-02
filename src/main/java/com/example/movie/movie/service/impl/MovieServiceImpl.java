@@ -4,6 +4,7 @@ import com.example.movie.movie.entity.Movie;
 import com.example.movie.movie.persistence.MovieDao;
 import com.example.movie.movie.repository.MovieRepository;
 import com.example.movie.movie.service.MovieService;
+import com.example.movie.movie.util.EType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +28,23 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.searchByParam(param);
     }
 
-    @Override
-    public List<Movie> filterByPurchasePrice(BigDecimal minPrice, BigDecimal maxPrice) {
-        return movieDao.filterByPurchasePrice(minPrice, maxPrice);
-    }
+//    @Override
+//    public List<Movie> filterByPurchasePrice(BigDecimal minPrice, BigDecimal maxPrice) {
+//        return movieDao.filterByPurchasePrice(minPrice, maxPrice);
+//    }
+//
+//    @Override
+//    public List<Movie> filterByRentalPrice(BigDecimal minPrice, BigDecimal maxPrice) {
+//        return movieDao.filterByRentalPrice(minPrice, maxPrice);
+//    }
 
     @Override
-    public List<Movie> filterByRentalPrice(BigDecimal minPrice, BigDecimal maxPrice) {
-        return movieDao.filterByRentalPrice(minPrice, maxPrice);
+    public List<Movie> filterByRangePrice(BigDecimal minPrice, BigDecimal maxPrice, EType type) {
+        if(type == EType.PURCHASE){
+            return movieDao.filterByPurchasePrice(minPrice, maxPrice);
+        }else{
+            return movieDao.filterByRentalPrice(minPrice, maxPrice);
+        }
     }
 
     @Override

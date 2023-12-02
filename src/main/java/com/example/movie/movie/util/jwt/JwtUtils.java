@@ -30,7 +30,7 @@ public class JwtUtils {
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(timeExpiration)))
-                .signWith(SignatureAlgorithm.HS256, getSignatureKey())
+                .signWith(getSignatureKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -40,6 +40,7 @@ public class JwtUtils {
             Jwts.parser()
                     .setSigningKey(getSignatureKey())
                     .parseClaimsJws(token);
+
             return true;
         } catch (Exception e) {
             log.info("Token invalid ".concat(e.getMessage()));

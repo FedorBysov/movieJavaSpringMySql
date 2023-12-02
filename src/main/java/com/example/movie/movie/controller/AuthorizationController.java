@@ -8,7 +8,6 @@ import com.example.movie.movie.service.EmailService;
 import com.example.movie.movie.util.ERole;
 import com.example.movie.movie.util.jwt.JwtUtils;
 import jakarta.validation.Valid;
-import org.apache.pdfbox.cos.COSObjectKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
